@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Tareas en Segundo Plano Java</string>
+
+    <!-- Definición del array de colores -->
+    <string-array name="colors_array">
+        <item>Rojo</item>
+        <item>Azul</item>
+        <item>Verde</item>
+    </string-array>
+</resources>
