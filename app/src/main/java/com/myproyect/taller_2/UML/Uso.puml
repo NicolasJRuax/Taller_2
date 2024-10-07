@@ -1,0 +1,14 @@
+@startuml
+actor Usuario as User
+
+User --> (Iniciar Aplicación)
+User --> (Configurar color de fondo)
+User --> (Guardar nombre)
+User --> (Ver saludo)
+
+(Iniciar Aplicación) --> (Pantalla de Inicio)
+(Guardar nombre) --> (Pantalla Principal)
+(Configurar color de fondo) --> (Pantalla de Configuración)
+(Ver saludo) --> (Pantalla de Inicio)
+
+@enduml

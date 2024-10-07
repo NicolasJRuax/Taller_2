@@ -1,0 +1,32 @@
+@startuml
+class MainActivity {
+    + EditText etName
+    + TextView tvSavedName
+    + TextView tvProgress
+    + Button btnSaveName
+    + Button btnStartTask
+    + Button btnGoToSettings
+    + onCreate()
+    - BackgroundTask
+}
+
+class ConfiguracionActivity {
+    + Spinner spinnerColors
+    + Button btnChangeColor
+    + Button btnGoToHome
+    + onCreate()
+}
+
+class InicioActivity {
+    + TextView greetingText
+    + Button goToMainButton
+    + onCreate()
+    + getGreetingMessage(String name)
+}
+
+MainActivity --> ConfiguracionActivity : "Launches"
+MainActivity --> InicioActivity : "Launches"
+InicioActivity --> MainActivity : "Launches"
+ConfiguracionActivity ..> SharedPreferences : "Stores user settings"
+MainActivity ..> SharedPreferences : "Reads user settings"
+@enduml
