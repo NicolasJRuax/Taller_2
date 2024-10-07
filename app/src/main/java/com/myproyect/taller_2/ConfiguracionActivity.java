@@ -2,6 +2,7 @@ package com.myproyect.taller_2;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
 
         spinnerColors = findViewById(R.id.spinnerColors);
         btnChangeColor = findViewById(R.id.btnChangeColor);
-        btnGoToHome = findViewById(R.id.btnGoToHome);
+        btnGoToHome = findViewById(com.example.tareasenfondojava.R.id.btnGoToHome);
 
         // Configurar el Spinner con los colores
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.colors_array, android.R.layout.simple_spinner_item);
@@ -34,17 +35,30 @@ public class ConfiguracionActivity extends AppCompatActivity {
         // Cambiar color de fondo
         btnChangeColor.setOnClickListener(view -> {
             String color = spinnerColors.getSelectedItem().toString();
+            int colorValue = 0; // Valor del color en formato int
+
+            // Determina el color seleccionado
             switch (color) {
                 case "Rojo":
-                    getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.red));
+                    colorValue = getResources().getColor(R.color.red);
                     break;
                 case "Azul":
-                    getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.blue));
+                    colorValue = getResources().getColor(R.color.blue);
                     break;
                 case "Verde":
-                    getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.green));
+                    colorValue = getResources().getColor(R.color.green);
                     break;
             }
+
+            // Guardar el color en SharedPreferences
+            SharedPreferences preferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("backgroundColor", colorValue); // Guardar el color seleccionado
+            editor.apply();
+
+            // Cambiar el color de fondo inmediatamente
+            getWindow().getDecorView().setBackgroundColor(colorValue);
+
             Toast.makeText(ConfiguracionActivity.this, "Color cambiado a " + color, Toast.LENGTH_SHORT).show();
         });
 
